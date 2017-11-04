@@ -104,39 +104,61 @@ var BAG_OF_LETTERS = [
 var YOUR_HAND = new Array();
 var SCORE = 0;
 
+/**
+ * Start the game
+ */
 function startGame() {
     addNumbersFromBag();
     displayHand();
 
 };
 
-
+/**
+ * Pick letters from the bag
+ */
+//袋子里+手里大于7个卡片时
 function addNumbersFromBag() {
     console.log("your hand has:" + YOUR_HAND.length);
-    for (var i = YOUR_HAND.length; i < 7; i++) {
-        YOUR_HAND[i] = getAvailableLetter();
+    var totalNumberOfCards = YOUR_HAND.length + BAG_OF_LETTERS.length;
+    if( totalNumberOfCards >= 7) {
+        for (var i = YOUR_HAND.length; i < 7; i++) {
+            YOUR_HAND[i] = getAvailableLetter();
+        }
+    } else {
+        for (var i = YOUR_HAND.length; i < totalNumberOfCards; i++) {
+            YOUR_HAND[i] = getAvailableLetter();
+        }
     }
-
 }
 
-
+/**
+ * Display letters in hand
+ */
 function displayHand() {
     console.log("your hand has:" + YOUR_HAND.length);
+    console.log("No. of letters in the bag: " + BAG_OF_LETTERS.length);
+    // for (var i = 0; i < YOUR_HAND.length; i++) {
+    //     console.log("#letter-" + (i + 1) + " set to " + YOUR_HAND[i].letter);
+    //     $("#letter-" + (i + 1)).addClass("letter-" + YOUR_HAND[i].letter);
+    //     $("#points-" + (i + 1)).addClass("points-" + YOUR_HAND[i].pointsWhenLettersUsed);
+    //
+    //     $("#letter-" + (i + 1)).html(YOUR_HAND[i].letter);
+    //
+    //     $("#points-" + (i + 1)).html(YOUR_HAND[i].pointsWhenLettersUsed);
+    // }
+    $("#letters-you-have-box").empty();
     for (var i = 0; i < YOUR_HAND.length; i++) {
-
         console.log("#letter-" + (i + 1) + " set to " + YOUR_HAND[i].letter);
-        $("#letter-" + (i + 1)).addClass("letter-" + YOUR_HAND[i].letter);
-        $("#points-" + (i + 1)).addClass("points-" + YOUR_HAND[i].pointsWhenLettersUsed);
-
-
-        $("#letter-" + (i + 1)).html(YOUR_HAND[i].letter);
-
-        $("#points-" + (i + 1)).html(YOUR_HAND[i].pointsWhenLettersUsed);
+        $('#letters-you-have-box').append("<div class='tile-piece col-xs-1'><p class='letter' id='#letter->" + (i+1) + "'>"
+            + YOUR_HAND[i].letter + "</p><p class='point' id='#points-"+ (i+1) +"'>" + YOUR_HAND[i].pointsWhenLettersUsed +"</p>" )
     }
-
 }
 
 
+/**
+ * Get available letters
+ * @returns {*}
+ */
 function getAvailableLetter() {
     var randomIndex = Math.floor(Math.random() * BAG_OF_LETTERS.length);
     var randomLetter = BAG_OF_LETTERS.splice(randomIndex, 1);
@@ -146,38 +168,48 @@ function getAvailableLetter() {
 
 
 function findWordToUse() {
-    //TODO Your job starts here.
-    //alert("Your code needs to go here");
-    $("#candidate-words").empty();
 
-    var group = new Array();
-    getAllGroup(YOUR_HAND, 0, group);
-    //console.log(group);
-    var allCandidateWords = new Array();
-    for(var i=0; i < group.length; i++) {
-        if(isThisAWord(group[i].word)) {
+    if(YOUR_HAND.length === 0 ) {
+        alert("No cards in your hand");
+    } else {
+        $("#candidate-words").empty();
+        var group = new Array();
+        getAllGroup(YOUR_HAND, 0, group);
+        //console.log(group);
+        var allCandidateWords = new Array();
+        for(var i=0; i < group.length; i++) {
+            if(isThisAWord(group[i].word)) {
                 allCandidateWords.push(group[i]);
+            }
+        }
+
+        // If no words can be found in the given letters
+        if(allCandidateWords.length === 0) {
+            alert("No words can be found");
+        } else {
+            allCandidateWords = removeDuplicateWords(allCandidateWords);
+            //console.log(allCandidateWords);
+            //console.log(getHighestPointWord(allCandidateWords));
+            var highestPointWords = getHighestPointWord(allCandidateWords);
+            var highestPoint = highestPointWords[0].score;
+            $('#highest-score').html("All candidate words with the highest score " + highestPoint+":");
+            $.each(highestPointWords, function(i, val) {
+                $('#candidate-words').append('<button class="candidate-word btn btn-info" value="' + val.word + '">'+val.word+ '</button>');
+            })
+
+            // Click button to select one candidate word from the list
+            $(".candidate-word").click(function() {
+                //console.log(this.value);
+                if (haveLettersForWord(this.value)) {
+                    successfullyAddedWord(this.value);
+                }
+                $("#candidate-words").empty();
+                $("#highest-score").empty();
+            });
         }
     }
-    allCandidateWords = removeDuplicateWords(allCandidateWords);
-    //console.log(allCandidateWords);
-    //console.log(getHighestPointWord(allCandidateWords));
-    var highestPointWords = getHighestPointWord(allCandidateWords);
-    var highestPoint = highestPointWords[0].score;
-    $('#highest-score').html("Highest score of all possible words:" + highestPoint);
-    $.each(highestPointWords, function(i, val) {
-        $('#candidate-words').append('<button class="candidate-word" value="' + val.word + '">'+val.word+ '</button>');
-    })
 
-    // Click button to select one candidate word from the list
-    $(".candidate-word").click(function() {
-        //console.log(this.value);
-        if (haveLettersForWord(this.value)) {
-            successfullyAddedWord(this.value);
-        }
-        $("#candidate-words").empty();
-        $("#highest-score").empty();
-    });
+
 }
 
 
@@ -229,6 +261,9 @@ function getHighestPointWord(wordList) {
     return res;
 }
 
+/**
+ * User input a word and check
+ */
 function humanFindWordToUse() {
 
     var humanFoundWord = $("#human-word-input").val();
@@ -242,13 +277,12 @@ function humanFindWordToUse() {
     } else {
         alert(humanFoundWord + " is not a valid word.");
     }
-
 }
 
 
 function successfullyAddedWord(foundWord) {
     $("#word-history-list").append("<li>" + foundWord + "</li>");
-    clearClasses();
+    //clearClasses();
     takeOutUsedLetters();
     addNumbersFromBag();
     displayHand();
@@ -277,13 +311,18 @@ function takeOutUsedLetters() {
 
 }
 
+/**
+ * Check if the letters in the proposed word are in the cards in hand
+ * @param aProposedWord
+ * @returns {boolean}
+ */
 function haveLettersForWord(aProposedWord) {
     //You could code the _ logic could go in this function
     var wordAsArray = aProposedWord.toUpperCase().split("");
     for (var i = 0; i < wordAsArray.length; i++) {
         var foundLetter = false;
         console.log(wordAsArray[i] + "<-For match");
-        for (ii = 0; ii < YOUR_HAND.length; ii++) {
+        for (var ii = 0; ii < YOUR_HAND.length; ii++) {
             console.log("              " + YOUR_HAND[ii].letter + "<-Checking");
             if (YOUR_HAND[ii].letter == wordAsArray [i]) {
                 if (!YOUR_HAND[ii].used && !foundLetter) {
@@ -293,14 +332,11 @@ function haveLettersForWord(aProposedWord) {
                 }
             }
         }
-
-
         if (!foundLetter) {
             resetHand();
             return false;
         }
     }
-
     return true;
 }
 
@@ -321,10 +357,14 @@ function isThisAWord(aProposedWord) {
 
 function retireHand() {
     //Loose all the points in your hand
-    clearClasses();
-    YOUR_HAND = new Array();
-    addNumbersFromBag();
-    displayHand();
+    //clearClasses();
+        YOUR_HAND = new Array();
+        addNumbersFromBag();
+        displayHand();
+        if(isGameFinished()) {
+            endGame();
+        }
+
 }
 
 function clearClasses() {
@@ -332,6 +372,25 @@ function clearClasses() {
         $("#letter-" + (ii + 1)).removeClass("letter-" + YOUR_HAND[ii].letter);
         $("#points-" + (ii + 1)).removeClass("points-" + YOUR_HAND[ii].pointsWhenLettersUsed);
     }
+}
+
+function isGameFinished() {
+    if(YOUR_HAND.length + BAG_OF_LETTERS.length == 0) {
+        return true;
+    } else
+        return false;
+}
+
+
+function endGame() {
+    alert("Game over");
+    $("#mainContainer").hide();
+    var html = "<h1>Game Over</h1>" + "<h3>Your total score: "+ $("#score-number").html() + "</h3><button class='btn btn-primary' id='play-again'>Play Again</button>";
+    $("#game-over").html(html);
+    $("#game-over").show();
+    $("#play-again").click(function(){
+        window.location.reload();
+    })
 }
 
 $(document).ready(function () {
@@ -344,7 +403,7 @@ $(document).ready(function () {
         humanFindWordToUse();
     });
     $("#retire-hand-button").click(function () {
-        retireHand();
+            retireHand();
     });
     $('#human-word-input').keypress(function (event) {
         if (event.which == 13) {

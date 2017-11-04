@@ -1,88 +1,170 @@
+/*#letters-you-have-box{*/
+/*margin-bottom: 20px;*/
+/*height: auto;*/
+/*}*/
+
+/*.letter{*/
+/*margin-top: -28px;*/
+/*margin-left: -10px;*/
+/*font-size: 5.2em;*/
+/*}*/
+/*.point{*/
+/*margin-top: -115px;*/
+/*margin-left: 50px;*/
+/*font-size: 1.8em;*/
+/*}*/
+
+/*.tile-piece {*/
+/*border-radius: 15px;*/
+/*background-repeat: repeat;*/
+/*padding: 20px; */
+/*width: 50px;*/
+/*height: 50px;*/
+/*margin: 10px;*/
+/*float: left;*/
+/*}*/
+
+
+/*.tile-piece-1 {*/
+/*background: url(../img/red-oak.jpg);*/
+/*background-position: left top;*/
+/*}*/
+
+/*.tile-piece-2 {*/
+/*background: url(../img/red-oak.jpg);*/
+/*background-position: right top;*/
+/*}*/
+/*.tile-piece-3 {*/
+/*background: url(../img/red-oak.jpg);*/
+/*background-position: left bottom;*/
+/*}*/
+/*.tile-piece-4 {*/
+/*background: url(../img/red-oak.jpg);*/
+/*background-position: right bottom;*/
+/*}*/
+
+/*.letter-I{*/
+/*margin-left: 10px;*/
+/*}*/
+/*.letter-J{*/
+/*margin-left: 8px;*/
+/*}*/
+/*.letter-P{*/
+/*margin-left: 3px;*/
+/*}*/
+/*.letter-M{*/
+/*margin-left: -15px;*/
+/*}*/
+/*.letter-N{*/
+/*margin-left: -7px;*/
+/*}*/
+/*.letter-W{*/
+/*margin-left: -14px;*/
+/*}*/
+/*.letter-S{*/
+/*margin-left: -2px;*/
+/*}*/
+/*.letter-F{*/
+/*margin-left: -2px;*/
+/*}*/
+/*.letter-_ {*/
+/*margin-left: -5px;*/
+/*}*/
+/*.letter-E {*/
+/*margin-left: -6px;*/
+/*}*/
+/*.letter-T{*/
+/*margin-left: -4px;*/
+/*}*/
+/*.letter-R{*/
+/*margin-left: -6px;*/
+/*}.letter-Q{*/
+/*margin-left: -12px;*/
+/*}*/
+/*.letter-L{*/
+/*margin-left: -4px;*/
+/*}*/
+/*.points-10{*/
+/*margin-left: 40px;*/
+/*}*/
+
+header {
+    text-align: center;
+}
+
 #letters-you-have-box{
-	/* column-count: 8; */
+    margin-bottom: 2em;
+    height: auto;
 }
 
 .letter{
-	margin-top: -28px;
-    margin-left: -10px;
     font-size: 5.2em;
 }
+
 .point{
-    margin-top: -115px;
-    margin-left: 50px;
-    
     font-size: 1.8em;
+    color: grey;
+    margin-left: 2.7em;
+    margin-top: -1.5em;
+
 }
 
 .tile-piece {
     border-radius: 15px;
-    background-repeat: repeat;
-    padding: 20px; 
-    width: 50px;
-    height: 50px;
-    margin: 10px;
+    background:url(../img/red-oak.jpg);
+    padding: 0 15px;
+    margin-left: 1em;
+    float: left;
 }
 
-
-.tile-piece-1 {
-    background: url(../img/red-oak.jpg);
-    background-position: left top;
+.candidate-word{
+    cursor: pointer;
 }
 
-.tile-piece-2 {
-    background: url(../img/red-oak.jpg);
-    background-position: right top;
+.left-container {
+    margin-bottom: 1em;
+    padding: 2rem;
+    border:grey solid thin;
+    border-radius: 8px;
+
 }
-.tile-piece-3 {
-    background: url(../img/red-oak.jpg);
-    background-position: left bottom;
-}
-.tile-piece-4 {
-    background: url(../img/red-oak.jpg);
-    background-position: right bottom;
+#highest-score {
+    margin-top: 2em;
+    margin-bottom: 1em;
 }
 
-.letter-I{
-	margin-left: 10px;
+#candidate-words button {
+    margin-right: 0.5em;
 }
-.letter-J{
-	margin-left: 8px;
+
+#words-found ul{
+    color: red;
 }
-.letter-P{
-	margin-left: 3px;
+
+#words-found {
+    padding: 1em;
+    border:lightcoral solid thin;
+    border-radius: 8px;
+    height: 16em;
+    overflow-y: scroll;
 }
-.letter-M{
-	margin-left: -15px;
+
+#score-box {
+    font-size:larger;
+    padding: 1em;
+    border:lightcoral solid thin;
+    border-radius: 8px;
+    margin-bottom:1em;
 }
-.letter-N{
-	margin-left: -7px;
+
+#score-number {
+    color: red;
 }
-.letter-W{
-	margin-left: -14px;
-}
-.letter-S{
-	margin-left: -2px;
-}
-.letter-F{
-	margin-left: -2px;
-}
-.letter-_ {
-	margin-left: -5px;
-}
-.letter-E {
-	margin-left: -6px;
-}
-.letter-T{
-	margin-left: -4px;
-}
-.letter-R{
-	margin-left: -6px;
-}.letter-Q{
-	margin-left: -12px;
-}
-.letter-L{
-	margin-left: -4px;
-}
-.points-10{
-	margin-left: 40px;
+
+#game-over {
+    display: none;
+    text-align:center;
+    height: 30em;
+    border: dashed skyblue;
+    padding-top:5em;
 }
