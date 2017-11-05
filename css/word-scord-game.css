@@ -1,170 +1,120 @@
-/*#letters-you-have-box{*/
-/*margin-bottom: 20px;*/
-/*height: auto;*/
-/*}*/
-
-/*.letter{*/
-/*margin-top: -28px;*/
-/*margin-left: -10px;*/
-/*font-size: 5.2em;*/
-/*}*/
-/*.point{*/
-/*margin-top: -115px;*/
-/*margin-left: 50px;*/
-/*font-size: 1.8em;*/
-/*}*/
-
-/*.tile-piece {*/
-/*border-radius: 15px;*/
-/*background-repeat: repeat;*/
-/*padding: 20px; */
-/*width: 50px;*/
-/*height: 50px;*/
-/*margin: 10px;*/
-/*float: left;*/
-/*}*/
-
-
-/*.tile-piece-1 {*/
-/*background: url(../img/red-oak.jpg);*/
-/*background-position: left top;*/
-/*}*/
-
-/*.tile-piece-2 {*/
-/*background: url(../img/red-oak.jpg);*/
-/*background-position: right top;*/
-/*}*/
-/*.tile-piece-3 {*/
-/*background: url(../img/red-oak.jpg);*/
-/*background-position: left bottom;*/
-/*}*/
-/*.tile-piece-4 {*/
-/*background: url(../img/red-oak.jpg);*/
-/*background-position: right bottom;*/
-/*}*/
-
-/*.letter-I{*/
-/*margin-left: 10px;*/
-/*}*/
-/*.letter-J{*/
-/*margin-left: 8px;*/
-/*}*/
-/*.letter-P{*/
-/*margin-left: 3px;*/
-/*}*/
-/*.letter-M{*/
-/*margin-left: -15px;*/
-/*}*/
-/*.letter-N{*/
-/*margin-left: -7px;*/
-/*}*/
-/*.letter-W{*/
-/*margin-left: -14px;*/
-/*}*/
-/*.letter-S{*/
-/*margin-left: -2px;*/
-/*}*/
-/*.letter-F{*/
-/*margin-left: -2px;*/
-/*}*/
-/*.letter-_ {*/
-/*margin-left: -5px;*/
-/*}*/
-/*.letter-E {*/
-/*margin-left: -6px;*/
-/*}*/
-/*.letter-T{*/
-/*margin-left: -4px;*/
-/*}*/
-/*.letter-R{*/
-/*margin-left: -6px;*/
-/*}.letter-Q{*/
-/*margin-left: -12px;*/
-/*}*/
-/*.letter-L{*/
-/*margin-left: -4px;*/
-/*}*/
-/*.points-10{*/
-/*margin-left: 40px;*/
-/*}*/
+body {
+    background: url("../img/background.jpg") center center fixed;
+    background-repeat: no-repeat;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
 
 header {
     text-align: center;
+    color: rgb(249, 217, 70);
+    margin: 2em 0;
+    text-shadow: #27408B 5px 5px 5px;
 }
 
-#letters-you-have-box{
-    margin-bottom: 2em;
+#left-container, #right-container {
+    border-radius: 15px;
+    padding: 2em 6em;
+}
+
+#left-container > div {
+    margin: 3em 2em;
+}
+
+#right-container > div {
+    background-color: rgba(255, 255, 254, 0.8);
+    border-radius: 8px;
+    padding: 1em;
+}
+
+#retire-hand-button {
+    background: rgb(249, 217, 70);
+    font-weight: 500;
+}
+
+#letters-you-have-box {
+    margin: 0 auto;
     height: auto;
-}
-
-.letter{
-    font-size: 5.2em;
-}
-
-.point{
-    font-size: 1.8em;
-    color: grey;
-    margin-left: 2.7em;
-    margin-top: -1.5em;
+    text-align: center;
+    padding: 2em 0;
 
 }
 
 .tile-piece {
     border-radius: 15px;
-    background:url(../img/red-oak.jpg);
     padding: 0 15px;
-    margin-left: 1em;
-    float: left;
+    border: dashed 3pt;
+    display: inline-block;
+    width: 8em;
+    height: 9em;
+    margin: 0 1em;
+    background: rgba(255, 255, 254, 0.8);
+
 }
 
-.candidate-word{
+.letter {
+    font-size: 5.2em;
+    color: #0000CD;
+    text-shadow: rgb(249, 217, 70) 5px 2px;
+}
+
+.point {
+    font-size: 1.8em;
+    color: black;
+    margin-left: 2.4em;
+    margin-top: -1em;
+
+}
+
+.candidate-word {
     cursor: pointer;
 }
 
-.left-container {
-    margin-bottom: 1em;
-    padding: 2rem;
-    border:grey solid thin;
-    border-radius: 8px;
-
-}
 #highest-score {
-    margin-top: 2em;
+    margin-top: 1em;
     margin-bottom: 1em;
+    font-size: 12pt;
+    color: white;
+    text-shadow: black 2px 1px 2px;
 }
 
 #candidate-words button {
     margin-right: 0.5em;
 }
 
-#words-found ul{
-    color: red;
+#words-found ul {
+    color: blue;
 }
 
 #words-found {
-    padding: 1em;
-    border:lightcoral solid thin;
-    border-radius: 8px;
-    height: 16em;
+    height: 14em;
     overflow-y: scroll;
+    background: url("../img/minion-reading.png") no-repeat center center;
 }
 
 #score-box {
-    font-size:larger;
-    padding: 1em;
-    border:lightcoral solid thin;
-    border-radius: 8px;
-    margin-bottom:1em;
+    font-size: larger;
+    margin-bottom: 1em;
+    background: url("../img/minion-banana.png") no-repeat right;
+    background-size: contain;
 }
 
 #score-number {
     color: red;
+    font-size: x-large;
 }
 
 #game-over {
     display: none;
-    text-align:center;
+    text-align: center;
     height: 30em;
-    border: dashed skyblue;
-    padding-top:5em;
+    padding-top: 5em;
+    color: white;
 }
+
+#game-over > button {
+    margin-top: 2em;
+}
+

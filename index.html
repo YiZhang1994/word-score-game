@@ -8,72 +8,35 @@
 </head>
 <body>
 <div id="mainContainer" class="container">
-    <header><h1>Word score game</h1></header>
+    <header><h1>Word Score Game</h1></header>
 
     <div id="letters-you-have-box" class="row">
-
-        <!--<table>-->
-            <!--<tr>-->
-                <!--<td>-->
-                    <!--<div class="tile-piece tile-piece-1"><p class="letter" id="letter-1"></p>-->
-                        <!--<p class="point" id="points-1"></p></div>-->
-                <!--</td>-->
-                <!--<td>-->
-                    <!--<div class="tile-piece tile-piece-2"><p class="letter" id="letter-2"></p>-->
-                        <!--<p class="point" id="points-2"></p></div>-->
-                <!--</td>-->
-                <!--<td>-->
-                    <!--<div class="tile-piece tile-piece-3"><p class="letter" id="letter-3"></p>-->
-                        <!--<p class="point" id="points-3"></p></div>-->
-                <!--</td>-->
-                <!--<td>-->
-                    <!--<div class="tile-piece tile-piece-4"><p class="letter" id="letter-4"></p>-->
-                        <!--<p class="point" id="points-4"></p></div>-->
-                <!--</td>-->
-                <!--<td>-->
-                    <!--<div class="tile-piece tile-piece-1"><p class="letter" id="letter-5"></p>-->
-                        <!--<p class="point" id="points-5"></p></div>-->
-                <!--</td>-->
-                <!--<td>-->
-                    <!--<div class="tile-piece tile-piece-2"><p class="letter" id="letter-6"></p>-->
-                        <!--<p class="point" id="points-6"></p></div>-->
-                <!--</td>-->
-                <!--<td>-->
-                    <!--<div class="tile-piece tile-piece-3"><p class="letter" id="letter-7"></p>-->
-                        <!--<p class="point" id="points-7"></p></div>-->
-                <!--</td>-->
-            <!--</tr>-->
-        <!--</table>-->
-
-
     </div>
 
     <div class="row">
-        <div class="col-md-6">
-            <div class="left-container">
-                <div class="input-group">
-                    <input type="text" id="human-word-input" class="form-control">
-                    <span class="input-group-btn">
+        <div class="col-md-7" id="left-container">
+            <div class="input-group">
+                <input type="text" id="human-word-input" class="form-control" placeholder="Type your word here">
+                <span class="input-group-btn">
                     <button id="human-find-word-button" class="btn btn-default">Human Find a word</button>
                     </span>
-                </div>
-
             </div>
-            <div class="left-container">
+            <div>
                 <button id="find-word-button" class="btn btn-default">Run your code to find a word</button>
                 <div id="machine-find-words">
                     <div id="highest-score"></div>
                     <div id="candidate-words"></div>
                 </div>
             </div>
-            <div class="left-container">
-            <button id="retire-hand-button" class="btn btn-primary">Retire the hand</button>
+            <div>
+                <button id="retire-hand-button" class="btn btn-default">Retire the hand</button>
             </div>
+
         </div>
-        <div class="col-md-4">
-            <div id="score-box" class="right-container"><p><strong>Score:&nbsp;</strong><span id="score-number">0</span></p></div>
-            <div id="words-found" class="right-container">
-            <p>Words found:</p>
+        <div class="col-md-5" id="right-container">
+            <div id="score-box"><p><strong>Score:&nbsp;</strong><span id="score-number">0</span></p></div>
+            <div id="words-found">
+                <p>Words found:</p>
                 <ul id="word-history-list">
                 </ul>
             </div>
@@ -83,13 +46,12 @@
     </div>
 </div>
 <div class="container" id="game-over">
-
 </div>
 
 <script type="text/javascript" src="lib/jquery-3.2.1.js"></script>
 <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-<script type="text/javascript" src="lib/wordList.min.js"></script>
+<script type="text/javascript" src="lib/wordList.js"></script>
 <script type="text/javascript" src="lib/wordBank.min.js"></script>
 <script type="text/javascript" src="js/word-score-game-letters.js"></script>
 <script type="text/javascript" src="js/word-score-game.js"></script>
